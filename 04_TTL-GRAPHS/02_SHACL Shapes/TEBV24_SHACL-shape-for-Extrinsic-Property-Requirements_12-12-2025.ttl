@@ -1,0 +1,53 @@
+## SHACL for Extrinsic / Functional Property Requirement Check (Office)
+
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> . 
+@prefix ifc23:   <https://standards.buildingsmart.org/IFC/DEV/IFC2x3/TC1/OWL#> .
+@prefix bot:     <https://w3id.org/bot#> .
+@prefix schema:  <http://schema.org/> .
+@prefix opm:     <https://w3id.org/opm#> .
+@prefix props:   <http://lbd.arch.rwth-aachen.de/props#> .
+@prefix tempo:   <https://w3id.org/tempo#> .
+@prefix loinlf:  <http://www.semanticweb.org/acer/ontologies/2025/3/LOINforLightingSimulation/> .
+@prefix ex:      <http://example.org/shapes#> .
+@prefix inst:    <http://ju.se/loin-for-light-simulation/BIM-model#> .
+
+ex:OfficeExtrinsicLightFixtureShape
+  a sh:NodeShape ;
+  sh:targetClass <https://pi.pauwel.be/voc/distributionelement#FlowTerminal> ;
+
+  # Office: Photometric recommendation (project-specific)
+  sh:property [
+    sh:path ( props:correlatedColorTemperature opm:hasPropertyState schema:value ) ;
+    sh:minCount 1 ; sh:maxCount 1 ;
+    sh:or ( [ sh:datatype xsd:decimal ] [ sh:datatype xsd:float ] [ sh:datatype xsd:integer ] ) ;
+    sh:minInclusive 3000 ; sh:maxInclusive 4000 ;
+    sh:message "Office space requirement: CCT should be between 3000–4000 K." ;
+    sh:severity sh:Info ;
+  ] ;
+
+  ## Office: IP must be 20 or above (IP20..IP69K)
+  sh:property [
+    sh:path ( props:iPRating opm:hasPropertyState schema:value ) ;
+    sh:minCount 1 ; sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+    sh:pattern "^IP([2-6][0-9]|69K)$" ;
+    sh:message "Office space requirement: IPRating must be IP20 or above (IP20…IP69K)." ;
+    sh:severity sh:Info ;
+  ] ;
+
+  ## Office: allowed MountingType set (disallows freestanding/pole/rail/connector/other etc.)
+  sh:property [
+    sh:path ( props:mountingType opm:hasPropertyState schema:value ) ;
+    sh:minCount 1 ; sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+    sh:in (
+      "SurfaceMounted"
+      "Pendant"
+      "Recessed"
+      "PartlyRecessed"
+      "TrimlessRecessed"
+    ) ;
+    sh:message "Office space requirement: MountingType must be one of the allowed types (surface-mounted/pendant/recessed/partly-recessed/trimless-recessed)." ;
+    sh:severity sh:Info ;
+  ] .

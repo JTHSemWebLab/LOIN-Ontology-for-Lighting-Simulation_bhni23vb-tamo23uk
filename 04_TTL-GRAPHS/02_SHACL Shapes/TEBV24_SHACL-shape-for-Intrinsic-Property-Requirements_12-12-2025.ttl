@@ -1,0 +1,140 @@
+## SHACL for Intrinsic Property Requirement Check (OIR / Data Quality)
+
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix ifc4:    <https://standards.buildingsmart.org/IFC/DEV/IFC4/ADD2/OWL#> .
+@prefix ifc23:   <https://standards.buildingsmart.org/IFC/DEV/IFC2x3/TC1/OWL#> .
+@prefix bot:     <https://w3id.org/bot#> .
+@prefix schema:  <http://schema.org/> .
+@prefix opm:     <https://w3id.org/opm#> .
+@prefix props:   <http://lbd.arch.rwth-aachen.de/props#> .
+@prefix tempo:   <https://w3id.org/tempo#> .
+@prefix loinlf:  <http://www.semanticweb.org/acer/ontologies/2025/3/LOINforLightingSimulation/> .
+@prefix ex:      <http://example.org/shapes#> .
+@prefix inst:    <http://ju.se/loin-for-light-simulation/BIM-model#> .
+
+ex:IntrinsicLightFixtureShape
+  a sh:NodeShape ;
+  sh:targetClass <https://pi.pauwel.be/voc/distributionelement#FlowTerminal> ;
+  sh:severity sh:Violation ;
+
+#Pset_Photometric
+  sh:property [
+    sh:path ( props:correlatedColorTemperature opm:hasPropertyState schema:value ) ;
+    sh:minCount 1 ; sh:maxCount 1 ;
+    sh:or ( [ sh:datatype xsd:decimal ] [ sh:datatype xsd:float ] [ sh:datatype xsd:integer ] ) ;
+    sh:minExclusive 0 ;
+    sh:message "CorrelatedColorTemperature must exist, be a number, and be > 0 (CCT cannot be zero or negative)." ;
+    sh:severity sh:Violation ;
+  ] ;
+
+  sh:property [
+    sh:path ( props:ratedLuminousFlux opm:hasPropertyState schema:value ) ;
+    sh:minCount 1 ; sh:maxCount 1 ;
+    sh:or ( [ sh:datatype xsd:decimal ] [ sh:datatype xsd:float ] [ sh:datatype xsd:integer ] ) ;
+    sh:minExclusive 0 ;
+    sh:message "Rated Luminous Flux must exist, be a number, and be > 0 (luminous flux cannot be zero or negative)." ;
+    sh:severity sh:Violation ;
+  ] ;
+
+  sh:property [
+    sh:path ( props:luminousEfficacy opm:hasPropertyState schema:value ) ;
+    sh:minCount 1 ; sh:maxCount 1 ;
+    sh:or ( [ sh:datatype xsd:decimal ] [ sh:datatype xsd:float ] ) ;
+    sh:minExclusive 0 ;
+    sh:message "LuminousEfficacy must exist, be a number, and be > 0 (efficacy cannot be zero)." ;
+    sh:severity sh:Violation ;
+  ] ;
+
+#Pset_Electric
+  sh:property [
+    sh:path ( props:ratedVoltage opm:hasPropertyState schema:value ) ;
+    sh:minCount 1 ; sh:maxCount 1 ;
+    sh:or ( [ sh:datatype xsd:decimal ] [ sh:datatype xsd:float ] [ sh:datatype xsd:integer ] ) ;
+    sh:minInclusive 220 ;
+    sh:maxInclusive 240 ;
+    sh:message "RatedSupplyVoltage must exist and be within 220–240 V (230 ±10 V)." ;
+    sh:severity sh:Violation ;
+  ] ;
+
+  sh:property [
+    sh:path ( props:powerFactor opm:hasPropertyState schema:value ) ;
+    sh:minCount 1 ; sh:maxCount 1 ;
+    sh:or ( [ sh:datatype xsd:decimal ] [ sh:datatype xsd:float ] ) ;
+    sh:minInclusive 0 ;
+    sh:maxInclusive 1.0 ;
+    sh:message "PowerFactor must exist and be between 0 and 1.0." ;
+    sh:severity sh:Violation ;
+  ] ;
+
+  sh:property [
+    sh:path ( props:standByPower opm:hasPropertyState schema:value ) ;
+    sh:minCount 1 ; sh:maxCount 1 ;
+    sh:or ( [ sh:datatype xsd:decimal ] [ sh:datatype xsd:float ] ) ;
+    sh:minInclusive 0 ;
+    sh:message "StandByPower must exist and be ≥ 0 (cannot be negative)." ;
+    sh:severity sh:Violation ;
+  ] ;
+
+#Pset_MechanicalAndInstallation
+  sh:property [
+    sh:path ( props:length opm:hasPropertyState schema:value ) ;
+    sh:minCount 1 ; sh:maxCount 1 ;
+    sh:or ( [ sh:datatype xsd:decimal ] [ sh:datatype xsd:float ] ) ;
+    sh:minExclusive 0 ;
+    sh:message "Length must exist and be > 0 (physical dimension cannot be zero or negative)." ;
+    sh:severity sh:Violation ;
+  ] ;
+
+  sh:property [
+    sh:path ( props:width opm:hasPropertyState schema:value ) ;
+    sh:minCount 1 ; sh:maxCount 1 ;
+    sh:or ( [ sh:datatype xsd:decimal ] [ sh:datatype xsd:float ] ) ;
+    sh:minExclusive 0 ;
+    sh:message "Width must exist and be > 0 (physical dimension cannot be zero or negative)." ;
+    sh:severity sh:Violation ;
+  ] ;
+
+  sh:property [
+    sh:path ( props:height opm:hasPropertyState schema:value ) ;
+    sh:minCount 1 ; sh:maxCount 1 ;
+    sh:or ( [ sh:datatype xsd:decimal ] [ sh:datatype xsd:float ] ) ;
+    sh:minExclusive 0 ;
+    sh:message "Height must exist and be > 0 (physical dimension cannot be zero or negative)." ;
+    sh:severity sh:Violation ;
+  ] ;
+
+#Enumerated IP Rating
+  sh:property [
+    sh:path ( props:iPRating opm:hasPropertyState schema:value ) ;
+    sh:minCount 1 ; sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+    sh:minLength 1 ;
+    sh:pattern "^IP([2-6][0-9]|69K)$" ;
+    sh:message "IPRating must exist, not be empty, and follow IEC/EN 60529 syntax (IP20…IP69K)." ;
+    sh:severity sh:Violation ;
+  ] ;
+
+#Enumerated MountingType
+  sh:property [
+    sh:path ( props:mountingType opm:hasPropertyState schema:value ) ;
+    sh:minCount 1 ; sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+    sh:minLength 1 ;
+    sh:in (
+      "SurfaceMounted"
+      "Pendant"
+      "FreeStanding"
+      "Recessed"
+      "PartlyRecessed"
+      "TrimlessRecessed"
+      "PoleTop"
+      "PoleSideEntry"
+      "PoleIntegrated"
+      "ConductorRail"
+      "Connector"
+      "Other"
+    ) ;
+    sh:message "MountingType must exist, not be empty, and be one of the allowed code values." ;
+    sh:severity sh:Violation ;
+  ] .

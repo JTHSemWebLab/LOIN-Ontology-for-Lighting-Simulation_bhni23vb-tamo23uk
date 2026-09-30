@@ -1,0 +1,18 @@
+PREFIX loinlf: <http://www.semanticweb.org/acer/ontologies/2025/3/LOINforLightingSimulation/>
+PREFIX loin:   <https://w3id.org/loin#>
+PREFIX tempo:  <https://w3id.org/tempo#>
+PREFIX ddf:    <http://ju.se/DataDictionaryForLightingFixture#>
+
+SELECT ?objectType ?infoContent ?groupOfProperties ?property
+WHERE {
+  loinlf:LightFixture_Object
+      loin:hasObjectType ?objectType ;
+      loin:hasAlphanumericalInformation ?infoContent .
+
+  ?infoContent
+      loin:hasGroupOfProperties ?groupOfProperties .
+
+  ?groupOfProperties
+      tempo:hasProperty ?property .
+}
+ORDER BY ?groupOfProperties ?property

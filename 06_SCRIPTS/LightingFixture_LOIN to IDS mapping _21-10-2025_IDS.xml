@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ids xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0.0">
+  <info>
+    <title>Lighting Fixture - LOIN Core Properties</title>
+    <version>1.1</version>
+    <description>LOIN-aligned core electrical, photometric, and mechanical properties for IfcLightFixtureType.</description>
+    <author>BIMEngineer@gmail.com</author>
+    <date>2025-12-12 </date>
+    <purpose>LightingSimulation</purpose>
+    <milestone>DesignPhase</milestone>
+  </info>
+  <specifications>
+    <specification name="Lighting Fixture - LOIN Core Properties" ifcVersion="IFC2X3" description="LOIN-aligned core electrical, photometric, and mechanical properties for IfcLightFixtureType." instructions="The specification highlights the requirements from LOIN for Lighting Fixture based on SIS-CEN/TS 17623:2021. Follow URI to review properties through Data Dictionary.">
+      <applicability>
+        <entity>
+          <name>
+            <simpleValue>IfcFlowTerminal</simpleValue>
+          </name>
+        </entity>
+      </applicability>
+      <requirements>
+        <property cardinality="required" dataType="IFCNORMALISEDRATIOMEASURE">
+          <propertySet>
+            <simpleValue>Pset_Electrical</simpleValue>
+          </propertySet>
+          <baseName>
+            <simpleValue>PowerFactor</simpleValue>
+          </baseName>
+        </property>
+        <property cardinality="required" dataType="IFCELECTRICVOLTAGEMEASURE">
+          <propertySet>
+            <simpleValue>Pset_Electrical</simpleValue>
+          </propertySet>
+          <baseName>
+            <simpleValue>RatedVoltage</simpleValue>
+          </baseName>
+        </property>
+        <property cardinality="required" dataType="IFCELECTRICPOWERMEASURE">
+          <propertySet>
+            <simpleValue>Pset_Electrical</simpleValue>
+          </propertySet>
+          <baseName>
+            <simpleValue>StandByPower</simpleValue>
+          </baseName>
+        </property>
+        <property cardinality="required" dataType="IFCELECTRICPOWERMEASURE">
+          <propertySet>
+            <simpleValue>Pset_MechanicalAndInstallation</simpleValue>
+          </propertySet>
+          <baseName>
+            <simpleValue>MountingType</simpleValue>
+          </baseName>
+          <value>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="SurfaceMounted"/>
+              <xs:enumeration value="Pendant"/>
+              <xs:enumeration value="FreeStanding"/>
+              <xs:enumeration value="Recessed"/>
+              <xs:enumeration value="PartlyRecessed"/>
+              <xs:enumeration value="TrimlessRecessed"/>
+              <xs:enumeration value="PoleTop"/>
+              <xs:enumeration value="PoleSideEntry"/>
+              <xs:enumeration value="PoleIntegrated"/>
+              <xs:enumeration value="ConductorRail"/>
+              <xs:enumeration value="Connector"/>
+              <xs:enumeration value="Other"/>
+            </xs:restriction>
+          </value>
+        </property>
+        <property cardinality="required" dataType="IFCLENGTHMEASURE">
+          <propertySet>
+            <simpleValue>Pset_MechanicalAndInstallation</simpleValue>
+          </propertySet>
+          <baseName>
+            <simpleValue>Length</simpleValue>
+          </baseName>
+        </property>
+        <property cardinality="required" dataType="IFCLABEL">
+          <propertySet>
+            <simpleValue>Pset_MechanicalAndInstallation</simpleValue>
+          </propertySet>
+          <baseName>
+            <simpleValue>IPRating</simpleValue>
+          </baseName>
+          <value>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="IP20"/>
+              <xs:enumeration value="IP21"/>
+              <xs:enumeration value="IP22"/>
+              <xs:enumeration value="IP23"/>
+              <xs:enumeration value="IP24"/>
+              <xs:enumeration value="IP25"/>
+              <xs:enumeration value="IP26"/>
+              <xs:enumeration value="IP27"/>
+              <xs:enumeration value="IP28"/>
+              <xs:enumeration value="IP30"/>
+              <xs:enumeration value="IP31"/>
+              <xs:enumeration value="IP32"/>
+              <xs:enumeration value="IP33"/>
+              <xs:enumeration value="IP34"/>
+              <xs:enumeration value="IP35"/>
+              <xs:enumeration value="IP36"/>
+              <xs:enumeration value="IP37"/>
+              <xs:enumeration value="IP38"/>
+              <xs:enumeration value="IP40"/>
+              <xs:enumeration value="IP41"/>
+              <xs:enumeration value="IP42"/>
+              <xs:enumeration value="IP43"/>
+              <xs:enumeration value="IP44"/>
+              <xs:enumeration value="IP45"/>
+              <xs:enumeration value="IP46"/>
+              <xs:enumeration value="IP47"/>
+              <xs:enumeration value="IP48"/>
+              <xs:enumeration value="IP50"/>
+              <xs:enumeration value="IP51"/>
+              <xs:enumeration value="IP52"/>
+              <xs:enumeration value="IP53"/>
+              <xs:enumeration value="IP54"/>
+              <xs:enumeration value="IP55"/>
+              <xs:enumeration value="IP56"/>
+              <xs:enumeration value="IP57"/>
+              <xs:enumeration value="IP58"/>
+              <xs:enumeration value="IP60"/>
+              <xs:enumeration value="IP61"/>
+              <xs:enumeration value="IP62"/>
+              <xs:enumeration value="IP63"/>
+              <xs:enumeration value="IP64"/>
+              <xs:enumeration value="IP65"/>
+              <xs:enumeration value="IP66"/>
+              <xs:enumeration value="IP67"/>
+              <xs:enumeration value="IP68"/>
+              <xs:enumeration value="IP69"/>
+              <xs:enumeration value="IP69K"/>
+            </xs:restriction>
+          </value>
+        </property>
+        <property cardinality="required" dataType="IFCLENGTHMEASURE">
+          <propertySet>
+            <simpleValue>Pset_MechanicalAndInstallation</simpleValue>
+          </propertySet>
+          <baseName>
+            <simpleValue>Height</simpleValue>
+          </baseName>
+        </property>
+        <property cardinality="required" dataType="IFCLENGTHMEASURE">
+          <propertySet>
+            <simpleValue>Pset_MechanicalAndInstallation</simpleValue>
+          </propertySet>
+          <baseName>
+            <simpleValue>Width</simpleValue>
+          </baseName>
+        </property>
+        <property cardinality="required" dataType="IFCLUMINOUSFLUXMEASURE">
+          <propertySet>
+            <simpleValue>Pset_Photometric</simpleValue>
+          </propertySet>
+          <baseName>
+            <simpleValue>RatedLuminousFlux</simpleValue>
+          </baseName>
+        </property>
+        <property cardinality="required" dataType="IFCRATIOMEASURE">
+          <propertySet>
+            <simpleValue>Pset_Photometric</simpleValue>
+          </propertySet>
+          <baseName>
+            <simpleValue>LuminousEfficacy</simpleValue>
+          </baseName>
+        </property>
+        <property cardinality="required" dataType="IFCTHERMODYNAMICTEMPERATUREMEASURE">
+          <propertySet>
+            <simpleValue>Pset_Photometric</simpleValue>
+          </propertySet>
+          <baseName>
+            <simpleValue>CorrelatedColorTemperature</simpleValue>
+          </baseName>
+        </property>
+      </requirements>
+    </specification>
+  </specifications>
+</ids>

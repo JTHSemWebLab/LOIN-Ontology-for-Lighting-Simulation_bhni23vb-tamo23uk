@@ -1,0 +1,20 @@
+# This is a Revit shared parameter file.
+# Do not edit manually.
+*META	VERSION	MINVERSION
+META	2	1
+*GROUP	ID	NAME
+GROUP	1	Pset_Electrical
+GROUP	2	Pset_Photometric
+GROUP	3	Pset_MechanicalAndInstallation
+*PARAM	GUID	NAME	DATATYPE	DATACATEGORY	GROUP	VISIBLE	DESCRIPTION	USERMODIFIABLE	HIDEWHENNOVALUE
+PARAM	50ef7b0e-7c67-4db3-8e16-e15b2cdedd40	RatedVoltage	IFCELECTRICVOLTAGEMEASURE		1	1	Nominal voltage at which the product operates normally as specified by the supplier or manufacturer.&#xD&#xA	1	0
+PARAM	8dc88133-fc8f-49d7-847c-fffba7d5ca1c	Height	IFCLENGTHMEASURE		3	1	Height of the housing of the luminaire or sensing device. Corresponds to z-axis, gaMilliM angle 180 and 180 vertical of the light distribution curve. This definition is regardless or orientation of luminaires. &#xD&#xA	1	0
+PARAM	394f3d45-89f0-43b8-b58a-62b9e74fe195	IPRating	IFCLABEL		3	1	The IP code classifies and rates the degree of protection provided against intrusion (body parts such as hands and fingers), dust, accidental contact, and water by mechanical casing and electrical enclosures. See Also, EN 60529.&#xD&#xA	1	0
+PARAM	afb7e358-0a0b-41f4-b93b-5bdb661579bd	StandByPower	IFCELECTRICPOWERMEASURE		1	1	Power consumption of switched off luminaire. All electrical components including emergency and lighting controls components have to be considered. Is also known as parasitic power. See also EN 15193-1.&#xD&#xA	1	0
+PARAM	8e74cc82-48b1-4e5c-a44c-6b06e9125545	MountingType	IFCLABEL		3	1	Type of mounting used for the luminaire or sensing device.&#xD&#xA	1	0
+PARAM	e41a048b-1149-482b-a3cf-e2a49ff2bc9e	LuminousEfficacy	IFCRATIOMEASURE		2	1	Quotient of the luminous flux emitted by the luminaire and the power absorbed by the light source and associated circuits of the luminaire.&#xD&#xA	1	0
+PARAM	6f0ab891-7f82-42c7-aca6-e98d24b6da39	Length	IFCLENGTHMEASURE		3	1	Length of the housing of the luminaire or sensing device. Length is set parallel to the C90-C270 plane. Corresponds to y-axis and with 90 horizontal of the Light Distribution Curve. This definition is regardless of orientation of luminaires. &#xD&#xA	1	0
+PARAM	83e79bc7-82db-4a56-9b74-4ed4ad5507b9	PowerFactor	IFCNORMALISEDRATIOMEASURE		1	1	Ratio of the amount of the active power to the apparant power at 100% load. See Also IEC 80000-6.&#xD&#xA	1	0
+PARAM	452646d1-a2ec-4a4c-b26d-725e072f0b56	CorrelatedColorTemperature	IFCTHERMODYNAMICTEMPERATUREMEASURE		2	1	The colour temperature of any source of radiation is defined as the temperature (in Kelvin) of a black-body or Planckian radiator whose radiation has the same chromaticity as the source radiation. See Also EN12665.&#xD&#xA	1	0
+PARAM	3bbadcdb-1b49-48c4-9024-b4db469adf0b	RatedLuminousFlux	IFCLUMINOUSFLUXMEASURE		2	1	Value of the initial luminous flux of a given type of light source declared by the manufacturer or the responsible vendor, the light source being operated at an ambient temperature of 25 degree celcius. See also EN13032-4.&#xD&#xA	1	0
+PARAM	522ce0e6-d075-4f13-95dd-e03f1c01f55b	Width	IFCLENGTHMEASURE		3	1	Width of the housing of the luminaire or sensing device. Width is set parallel to the C0-C180 plane. Corresponds to the x-axis and with 0 horizontal of the Light Distribution Curve. This definition is regardless of orientation of luminaires. &#xD&#xA	1	0

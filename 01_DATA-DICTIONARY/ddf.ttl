@@ -1,0 +1,257 @@
+@prefix ddf: <https://bhni23vb.github.io/LOIN-DDD/ddf> .
+@prefix tempo: <https://w3id.org/tempo#> .
+@prefix isoprops: <https://w3id.org/isoprops#> .
+@prefix lppo: <http://w3id.org/ppon/lppo#>  .
+@prefix bppo: <http://w3id.org/ppon/bppo#> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dcterms:  <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:     <http://www.w3.org/2004/02/skos/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix schema:   <http://schema.org/> .
+@prefix ifc: <https://standards.buildingsmart.org/IFC/DEV/IFC4/ADD2/OWL#> .
+
+@base <https://bhni23vb.github.io/LOIN-DDD/ddf> . 
+
+<https://bhni23vb.github.io/LOIN-DDD/ddf> rdf:type owl:Ontology ;
+                                            owl:versionIRI <https://bhni23vb.github.io/LOIN-DDD/ddf/v1.1> ;
+                                            rdfs:comment "This is the Data Dictionary created for Lighting Fixture based on SIS-CEN/TS 17623:2021 by resusing existing ontologies such as Lighting Fixture Product Ontology (LPPO), LOIN, Isoprops, Data Template Ontology (TempO) to address the use case in a master's thesis by Mohamad Monir Taktak & Nischal Bhattarai.The thesis project Lifting Heterogeneous Data into RDF/OWL Knowledge Graph: A Semantic Approach conducted as part of the Master's program in Sustainable Building Information Management at Jönköping University.";
+                                            dcterms:title "Data Dictionary for Lighting Fixture" ;
+                                            dcterms:creator "Nischal Bhattarai";
+                                            dcterms:description "A DD";
+                                            dcterms:issued "2025-10-12"^^xsd:date.
+
+
+
+### Photometric data type properties
+ddf:CorrelatedColorTemperature a isoprops:Property ;
+    skos:definition "The colour temperature of any source of radiation is defined as the temperature (in Kelvin) of a black-body or Planckian radiator whose radiation has the same chromaticity as the source radiation. See Also EN12665." ;
+    dcterms:identifier "04-0023" ;
+    rdfs:label "Correlated Color Temperature (CCT)" ;
+    skos:notation "Tb" ;
+    tempo:hasDatatype ddf:CCTDatatype ; 
+    isoprops:hasUnit unit:K ; 
+    isoprops:globallyUniqueIdentifier  "0XeHsouWz8PxASJ4mpkdEY" .
+
+ddf:LumenOutput a isoprops:Property ;
+    skos:definition "Value of the initial luminous flux of a given type of light source declared by the manufacturer or the responsible vendor, the light source being operated at an ambient temperature of 25 degree celcius. See also EN13032-4." ;
+    dcterms:identifier "04-0006" ;
+    rdfs:label "Rated Luminous flux of the light source" ;
+    tempo:hasDatatype ddf:LumenOutputDatatype ; 
+    isoprops:hasUnit unit:LM ; 
+    isoprops:globallyUniqueIdentifier  "2gmo70bVX90uJh2YAvS62s" .
+
+ddf:LuminousEfficacy a isoprops:Property ;
+    skos:definition "Quotient of the luminous flux emitted by the luminaire and the power absorbed by the light source and associated circuits of the luminaire." ;
+    dcterms:identifier "04-0007" ;
+    rdfs:label "Luminous Efficacy" ;
+    tempo:hasDatatype ddf:LuminousEfficacyDatatype ; 
+    isoprops:hasUnit unit:LM-Per-W ; 
+    isoprops:globallyUniqueIdentifier "1QmFILGbX6_BfU63rG5mrh" .
+
+#Datatype expansion
+ddf:CCTDatatype a tempo:Datatype ;
+  tempo:dataType xsd:float .
+
+ddf:LumenOutputDatatype a tempo:Datatype ;
+  tempo:dataType xsd:float .
+
+ddf:LuminousEfficacyDatatype a tempo:Datatype ;
+  tempo:dataType xsd:float .
+
+### Electrical data type properties
+ddf:RatedVoltage a isoprops:Property ;
+    skos:definition "Nominal voltage at which the product operates normally as specified by the supplier or manufacturer." ;
+    dcterms:identifier "02-0028" ;
+    rdfs:label "Nominal mains volatage" ;
+    tempo:hasDatatype ddf:RatedVoltageDatatype ; 
+    isoprops:hasUnit unit:V ; 
+    isoprops:globallyUniqueIdentifier  "3ERn8VgnjDjhulH3MaG9yG" .
+
+ddf:PowerFactor  a isoprops:Property ;
+    skos:definition "Ratio of the amount of the active power to the apparant power at 100% load. See Also IEC 80000-6." ;
+    dcterms:identifier "02-0003" ;
+    rdfs:label "Power Factor" ;
+    skos:notation "cos φ " ;
+    tempo:hasDatatype ddf:PowerFactorDatatype ; 
+    isoprops:hasUnit unit:UNITLESS ; 
+    isoprops:globallyUniqueIdentifier  "3LBrQkLDDFheBOxrGk8Zr_" .
+
+ddf:StandByPower a isoprops:Property ;
+    skos:definition "Power consumption of switched off luminaire. All electrical components including emergency and lighting controls components have to be considered. Is also known as parasitic power. See also EN 15193-1." ;
+    dcterms:identifier "02-0006" ;
+    rdfs:label "Standby Power" ;
+    tempo:hasDatatype ddf:StandByPowerDatatype ; 
+    isoprops:hasUnit unit:W ; 
+    isoprops:globallyUniqueIdentifier  "0TzE4sMDv1pwfygK1xxjm5" .
+
+#Datatype expansion
+ddf:RatedVoltageDatatype a tempo:Datatype ;
+  tempo:dataType xsd:float .
+
+ddf:PowerFactorDatatype a tempo:Datatype ;
+  tempo:dataType xsd:float .
+
+ddf:StandByPowerDatatype a tempo:Datatype ;
+  tempo:dataType xsd:float .
+
+### MechanicalInstallation data type properties
+ddf:Length a isoprops:Property ;
+    skos:definition "Length of the housing of the luminaire or sensing device. Length is set parallel to the C90-C270 plane. Corresponds to y-axis and with 90 horizontal of the Light Distribution Curve. This definition is regardless of orientation of luminaires. See Figure 1." ;
+    dcterms:identifier "01-0003" ;
+    rdfs:label "Length" ;
+    tempo:hasDatatype ddf:LengthDatatype ; 
+    isoprops:hasUnit unit:MilliM ; 
+    isoprops:globallyUniqueIdentifier  "1uJglYpRnFpQ4tStHaR2Pf" .
+
+ddf:Width  a isoprops:Property ;
+    skos:definition "Width of the housing of the luminaire or sensing device. Width is set parallel to the C0-C180 plane. Corresponds to the x-axis and with 0 horizontal of the Light Distribution Curve. This definition is regardless of orientation of luminaires. See Figure 1." ;
+    dcterms:identifier "01-0004" ;
+    rdfs:label "Width" ;
+    tempo:hasDatatype ddf:WidthDatatype; 
+    isoprops:hasUnit unit:MilliM ; 
+    isoprops:globallyUniqueIdentifier  "1dPvrZN3vEIB0n0vwYvDcX" .
+
+ddf:Height a isoprops:Property ;
+    skos:definition "Height of the housing of the luminaire or sensing device. Corresponds to z-axis, gaMilliM angle 180 and 180 vertical of the light distribution curve. This definition is regardless or orientation of luminaires. See Figures 1." ;
+    dcterms:identifier "01-0002" ;
+    rdfs:label "Height" ;
+    tempo:hasDatatype ddf:HeightDatatype ; 
+    isoprops:hasUnit unit:MilliM ; 
+    isoprops:globallyUniqueIdentifier  "19Z9XKYDT4p8HR0ZbD$wO_" .
+
+ddf:IPRating  a isoprops:Property ;
+    skos:definition "The IP code classifies and rates the degree of protection provided against intrusion (body parts such as hands and fingers), dust, accidental contact, and water by mechanical casing and electrical enclosures. See Also, EN 60529." ;
+    dcterms:identifier "02-0031" ;
+    rdfs:label "Ingress protection IP Code" ;
+    tempo:hasDatatype ddf:IPRatingDatatype ; 
+    isoprops:hasUnit unit:UNITLESS ; 
+    isoprops:globallyUniqueIdentifier  "1K_1K1q6n7KgOFJw5Cuc_i" .
+    
+
+ddf:MountingType a isoprops:Property ;
+    skos:definition "Type of mounting used for the luminaire or sensing device." ;
+    dcterms:identifier "06-0003" ;
+    rdfs:label "Mounting Type" ;
+    tempo:hasDatatype ddf:MountingTypeDatatype ; 
+    isoprops:hasUnit unit:UNITLESS ; 
+    isoprops:globallyUniqueIdentifier  "3m5UX0NuH4YRPUJ1EmzXz7" .
+
+#Datatype expansion
+ddf:LengthDatatype a tempo:Datatype ;
+  tempo:dataType xsd:float .
+
+ddf:WidthDatatype a tempo:Datatype ;
+  tempo:dataType xsd:float .
+
+ddf:HeightDatatype a tempo:Datatype ;
+  tempo:dataType xsd:float .
+
+ddf:IPRatingDatatype a tempo:Datatype ;
+    tempo:dataType xsd:string ;
+    tempo:hasEnumeration    ddf:IPEnumeration .
+
+ddf:MountingTypeDatatype a tempo:Datatype ;
+    tempo:dataType xsd:string ;
+    tempo:hasEnumeration    ddf:MountingTypeEnumeration .
+
+#Enumeration List for IP Rating.
+ddf:IPEnumeration a tempo:Enumeration    ;
+    tempo:hasEnumerationItem    
+
+    ddf:IP20 , ddf:IP21 , ddf:IP22 , ddf:IP23 , ddf:IP24 ,
+    ddf:IP25 , ddf:IP26 , ddf:IP27 , ddf:IP28 ,
+    ddf:IP30 , ddf:IP31 , ddf:IP32 , ddf:IP33 , ddf:IP34 ,
+    ddf:IP35 , ddf:IP36 , ddf:IP37 , ddf:IP38 ,
+    ddf:IP40 , ddf:IP41 , ddf:IP42 , ddf:IP43 , ddf:IP44 ,
+    ddf:IP45 , ddf:IP46 , ddf:IP47 , ddf:IP48 ,
+    ddf:IP50 , ddf:IP51 , ddf:IP52 , ddf:IP53 , ddf:IP54 ,
+    ddf:IP55 , ddf:IP56 , ddf:IP57 , ddf:IP58 ,
+    ddf:IP60 , ddf:IP61 , ddf:IP62 , ddf:IP63 , ddf:IP64 ,
+    ddf:IP65 , ddf:IP66 , ddf:IP67 , ddf:IP68 , ddf:IP69 , ddf:IP69K  .
+
+#Enumeration Items for IP Rating
+ddf:IP20  a tempo:EnumerationItem ;  rdfs:label "IP20"@en ;  schema:value "IP20" ;  tempo:order "1"  .
+ddf:IP21  a tempo:EnumerationItem ;  rdfs:label "IP21"@en ;  schema:value "IP21" ;  tempo:order "2"  .
+ddf:IP22  a tempo:EnumerationItem ;  rdfs:label "IP22"@en ;  schema:value "IP22" ;  tempo:order "3"  .
+ddf:IP23  a tempo:EnumerationItem ;  rdfs:label "IP23"@en ;  schema:value "IP23" ;  tempo:order "4"  .
+ddf:IP24  a tempo:EnumerationItem ;  rdfs:label "IP24"@en ;  schema:value "IP24" ;  tempo:order "5"  .
+ddf:IP25  a tempo:EnumerationItem ;  rdfs:label "IP25"@en ;  schema:value "IP25" ;  tempo:order "6"  .
+ddf:IP26  a tempo:EnumerationItem ;  rdfs:label "IP26"@en ;  schema:value "IP26" ;  tempo:order "7"  .
+ddf:IP27  a tempo:EnumerationItem ;  rdfs:label "IP27"@en ;  schema:value "IP27" ;  tempo:order "8"  .
+ddf:IP28  a tempo:EnumerationItem ;  rdfs:label "IP28"@en ;  schema:value "IP28" ;  tempo:order "9"  .
+
+ddf:IP30  a tempo:EnumerationItem ;  rdfs:label "IP30"@en ;  schema:value "IP30" ;  tempo:order "10" .
+ddf:IP31  a tempo:EnumerationItem ;  rdfs:label "IP31"@en ;  schema:value "IP31" ;  tempo:order "11" .
+ddf:IP32  a tempo:EnumerationItem ;  rdfs:label "IP32"@en ;  schema:value "IP32" ;  tempo:order "12" .
+ddf:IP33  a tempo:EnumerationItem ;  rdfs:label "IP33"@en ;  schema:value "IP33" ;  tempo:order "13" .
+ddf:IP34  a tempo:EnumerationItem ;  rdfs:label "IP34"@en ;  schema:value "IP34" ;  tempo:order "14" .
+ddf:IP35  a tempo:EnumerationItem ;  rdfs:label "IP35"@en ;  schema:value "IP35" ;  tempo:order "15" .
+ddf:IP36  a tempo:EnumerationItem ;  rdfs:label "IP36"@en ;  schema:value "IP36" ;  tempo:order "16" .
+ddf:IP37  a tempo:EnumerationItem ;  rdfs:label "IP37"@en ;  schema:value "IP37" ;  tempo:order "17" .
+ddf:IP38  a tempo:EnumerationItem ;  rdfs:label "IP38"@en ;  schema:value "IP38" ;  tempo:order "18" .
+
+ddf:IP40  a tempo:EnumerationItem ;  rdfs:label "IP40"@en ;  schema:value "IP40" ;  tempo:order "19" .
+ddf:IP41  a tempo:EnumerationItem ;  rdfs:label "IP41"@en ;  schema:value "IP41" ;  tempo:order "20" .
+ddf:IP42  a tempo:EnumerationItem ;  rdfs:label "IP42"@en ;  schema:value "IP42" ;  tempo:order "21" .
+ddf:IP43  a tempo:EnumerationItem ;  rdfs:label "IP43"@en ;  schema:value "IP43" ;  tempo:order "22" .
+ddf:IP44  a tempo:EnumerationItem ;  rdfs:label "IP44"@en ;  schema:value "IP44" ;  tempo:order "23" .
+ddf:IP45  a tempo:EnumerationItem ;  rdfs:label "IP45"@en ;  schema:value "IP45" ;  tempo:order "24" .
+ddf:IP46  a tempo:EnumerationItem ;  rdfs:label "IP46"@en ;  schema:value "IP46" ;  tempo:order "25" .
+ddf:IP47  a tempo:EnumerationItem ;  rdfs:label "IP47"@en ;  schema:value "IP47" ;  tempo:order "26" .
+ddf:IP48  a tempo:EnumerationItem ;  rdfs:label "IP48"@en ;  schema:value "IP48" ;  tempo:order "27" .
+
+ddf:IP50  a tempo:EnumerationItem ;  rdfs:label "IP50"@en ;  schema:value "IP50" ;  tempo:order "28" .
+ddf:IP51  a tempo:EnumerationItem ;  rdfs:label "IP51"@en ;  schema:value "IP51" ;  tempo:order "29" .
+ddf:IP52  a tempo:EnumerationItem ;  rdfs:label "IP52"@en ;  schema:value "IP52" ;  tempo:order "30" .
+ddf:IP53  a tempo:EnumerationItem ;  rdfs:label "IP53"@en ;  schema:value "IP53" ;  tempo:order "31" .
+ddf:IP54  a tempo:EnumerationItem ;  rdfs:label "IP54"@en ;  schema:value "IP54" ;  tempo:order "32" .
+ddf:IP55  a tempo:EnumerationItem ;  rdfs:label "IP55"@en ;  schema:value "IP55" ;  tempo:order "33" .
+ddf:IP56  a tempo:EnumerationItem ;  rdfs:label "IP56"@en ;  schema:value "IP56" ;  tempo:order "34" .
+ddf:IP57  a tempo:EnumerationItem ;  rdfs:label "IP57"@en ;  schema:value "IP57" ;  tempo:order "35" .
+ddf:IP58  a tempo:EnumerationItem ;  rdfs:label "IP58"@en ;  schema:value "IP58" ;  tempo:order "36" .
+
+ddf:IP60  a tempo:EnumerationItem ;  rdfs:label "IP60"@en ;  schema:value "IP60" ;  tempo:order "37" .
+ddf:IP61  a tempo:EnumerationItem ;  rdfs:label "IP61"@en ;  schema:value "IP61" ;  tempo:order "38" .
+ddf:IP62  a tempo:EnumerationItem ;  rdfs:label "IP62"@en ;  schema:value "IP62" ;  tempo:order "39" .
+ddf:IP63  a tempo:EnumerationItem ;  rdfs:label "IP63"@en ;  schema:value "IP63" ;  tempo:order "40" .
+ddf:IP64  a tempo:EnumerationItem ;  rdfs:label "IP64"@en ;  schema:value "IP64" ;  tempo:order "41" .
+ddf:IP65  a tempo:EnumerationItem ;  rdfs:label "IP65"@en ;  schema:value "IP65" ;  tempo:order "42" .
+ddf:IP66  a tempo:EnumerationItem ;  rdfs:label "IP66"@en ;  schema:value "IP66" ;  tempo:order "43" .
+ddf:IP67  a tempo:EnumerationItem ;  rdfs:label "IP67"@en ;  schema:value "IP67" ;  tempo:order "44" .
+ddf:IP68  a tempo:EnumerationItem ;  rdfs:label "IP68"@en ;  schema:value "IP68" ;  tempo:order "45" .
+ddf:IP69  a tempo:EnumerationItem ;  rdfs:label "IP69"@en ;  schema:value "IP69" ;  tempo:order "46" .
+ddf:IP69K a tempo:EnumerationItem ;  rdfs:label "IP69K"@en ; schema:value "IP69K" ; tempo:order "47" .
+
+
+#Enumeration List for Mounting Type.
+ddf:MountingTypeEnumeration a tempo:Enumeration    ;
+    tempo:hasEnumerationItem  
+    ddf:SurfaceMounted ,
+    ddf:Pendant ,
+    ddf:FreeStanding ,
+    ddf:Recessed ,
+    ddf:PartlyRecessed ,
+    ddf:TrimlessRecessed ,
+    ddf:PoleTop ,
+    ddf:PoleSideEntry ,
+    ddf:PoleIntegrated ,
+    ddf:ConductorRail ,
+    ddf:Connector . 
+
+# Enumeration item for Mounting Type
+ddf:SurfaceMounted   a tempo:EnumerationItem ; rdfs:label "Surface mounted"@en ;  schema:value "surface-mounted" ;   tempo:order "1" .
+ddf:Pendant          a tempo:EnumerationItem ; rdfs:label "Pendant"@en ;          schema:value "pendant" ;          tempo:order "2" .
+ddf:FreeStanding     a tempo:EnumerationItem ; rdfs:label "Free standing"@en ;    schema:value "free-standing" ;    tempo:order "3" .
+ddf:Recessed         a tempo:EnumerationItem ; rdfs:label "Recessed"@en ;         schema:value "recessed" ;         tempo:order "4" .
+ddf:PartlyRecessed   a tempo:EnumerationItem ; rdfs:label "Partly recessed"@en ;  schema:value "partly-recessed" ;  tempo:order "5" .
+ddf:TrimlessRecessed a tempo:EnumerationItem ; rdfs:label "Trimless recessed"@en ;schema:value "trimless-recessed" ; tempo:order "6" .
+ddf:PoleTop          a tempo:EnumerationItem ; rdfs:label "Pole-top"@en ;         schema:value "pole-top" ;         tempo:order "7" .
+ddf:PoleSideEntry    a tempo:EnumerationItem ; rdfs:label "Pole-side entry"@en ;  schema:value "pole-side-entry" ;  tempo:order "8" .
+ddf:PoleIntegrated   a tempo:EnumerationItem ; rdfs:label "Pole-integrated"@en ;  schema:value "pole-integrated" ;  tempo:order "9" .
+ddf:ConductorRail    a tempo:EnumerationItem ; rdfs:label "Conductor rail"@en ;   schema:value "conductor-rail" ;   tempo:order "10" .
+ddf:Connector        a tempo:EnumerationItem ; rdfs:label "Connector"@en ;        schema:value "connector" ;        tempo:order "11" .
+ddf:Other            a tempo:EnumerationItem ; rdfs:label "Other"@en ;            schema:value "other" ;            tempo:order "12" .

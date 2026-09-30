@@ -1,0 +1,78 @@
+@prefix loinlf: <http://www.semanticweb.org/acer/ontologies/2025/3/LOINforLightingSimulation/> .
+@prefix loin: <https://w3id.org/loin#> .
+@prefix tempo: <https://w3id.org/tempo#> .
+@prefix isoprops: <https://w3id.org/isoprops#> .
+@prefix lppo: <http://w3id.org/ppon/lppo#>  .
+@prefix bppo: <http://w3id.org/ppon/bppo#> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dcterms:  <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:     <http://www.w3.org/2004/02/skos/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix schema:   <http://schema.org/> .
+@prefix exm:  <https://ju.se/ontologies/loin/lighting-sim/meta#> .
+@prefix ifc: <https://standards.buildingsmart.org/IFC/DEV/IFC4/ADD2/OWL#> .
+@prefix ddf: <http://ju.se/DataDictionaryForLightingFixture#> .
+
+@base <http://www.semanticweb.org/acer/ontologies/2025/3/LOINforLightingSimulation/> .
+
+<http://ju.se/LOINforLightingSimulation> rdf:type owl:Ontology ;
+                                            owl:versionIRI <http://ju.se/LOINforLightingSimulation/v1.1> ;
+                                            rdfs:comment "This is the LOIN requirement for lighting simulation developed by resusing existing ontologies such as Lighting Fixture Product Ontology (LPPO), LOIN, Isoprops, Data Template Ontology (TempO) to address the use case in a master's thesis by Mohamad Monir Taktak & Nischal Bhattarai.The thesis project Lifting Heterogeneous Data into RDF/OWL Knowledge Graph: A Semantic Approach conducted as part of the Master's program in Sustainable Building Information Management at Jönköping University.".
+
+# LOIN Container
+loinlf:LOIN_Lighting_InfoRequirement a loin:LevelOfInformationNeed ;
+    loin:hasSpecification   loinlf:Spec_LightFixture .
+
+#Container for groups prerequisites and Object SPOT
+
+loinlf:Spec_LightFixture a loin:Specification ;
+    loin:hasPrerequisites   loinlf:PreReq_LightFixture ;
+    loin:hasSpecificationPerObjectType  loinlf:LightFixture_Object .
+
+#Prerequisites Container
+loinlf:PreReq_LightFixture  a loin:Prerequisites ;
+    loin:hasPurpose loinlf:LightingSimulation ;
+    loin:hasSendingActor loinlf:LightManufacturer ;
+    loin:hasReceivingActor loinlf:Architect ;
+    loin:hasInformationDeliveryMilestone loinlf:DesignPhase .
+    
+#Define Prerequisites
+loinlf:LightingSimulation a loin:Purpose .
+loinlf:LightManufacturer a loin:Actor .
+loinlf:Architect a loin:Actor .
+loinlf:DesignPhase  a loin:InformationDeliveryMilestone .
+
+#Light Fixture Object SPOT
+loinlf:LightFixture_Object  a loin:SpecificationPerObjectType ;
+    loin:hasObjectType  loinlf:IfcLightFixtureType ;
+    loin:hasAlphanumericalInformation loinlf:LightFixture_InfoContent ;
+    isoprops:hasExternalDictionaryReference loinlf:LightingPropertyDataDictionary .
+
+#Object Type as per tempO
+loinlf:IfcLightFixtureType a tempo:ObjectType ;
+    tempo:hasReferenceDocument <Fagerhult_Notor_RDF_2025-04-09_property-naming-convention.ttl> ;
+    rdfs:seeAlso    ifc:IfcLightFixture .
+
+### Reference Document
+<Fagerhult_Notor_RDF_2025-04-09_property-naming-convention.ttl> a tempo:ReferenceDocument ;
+    rdfs:comment "Attach the file to the LOIN when send it to the recevir." .
+
+# Alphanumerical Information Content
+loinlf:LightFixture_InfoContent a loin:AlphanumericalInformation ;
+    loin:hasGroupOfProperties loinlf:Pset_Photometric , loinlf:Pset_Electrical , loinlf:Pset_MechanicalAndInstallation .
+
+# Photometric Requirements Property Set
+loinlf:Pset_Photometric  a tempo:GroupOfProperties ;
+    tempo:hasProperty ddf:CorrelatedColorTemperature , ddf:RatedLuminousFlux , ddf:LuminousEfficacy .
+
+# Electrical Requirements Property Set
+loinlf:Pset_Electrical a tempo:GroupOfProperties ;
+    tempo:hasProperty ddf:RatedVoltage , ddf:PowerFactor , ddf:StandByPower .
+
+# Mechanical & Installation Requirements Property Set
+loinlf:Pset_MechanicalAndInstallation a tempo:GroupOfProperties ;
+    tempo:hasProperty ddf:Length , ddf:Width , ddf:Height , ddf:IPRating , ddf:MountingType .

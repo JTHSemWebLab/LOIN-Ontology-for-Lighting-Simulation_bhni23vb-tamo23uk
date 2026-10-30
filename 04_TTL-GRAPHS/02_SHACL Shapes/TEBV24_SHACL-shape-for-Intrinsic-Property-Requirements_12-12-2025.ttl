@@ -3,7 +3,7 @@
 @prefix sh:      <http://www.w3.org/ns/shacl#> .
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 @prefix ifc4:    <https://standards.buildingsmart.org/IFC/DEV/IFC4/ADD2/OWL#> .
-@prefix ifc23:   <https://standards.buildingsmart.org/IFC/DEV/IFC2x3/TC1/OWL#> .
+@prefix ifc:   <https://standards.buildingsmart.org/IFC/DEV/IFC2x3/TC1/OWL#> .
 @prefix bot:     <https://w3id.org/bot#> .
 @prefix schema:  <http://schema.org/> .
 @prefix opm:     <https://w3id.org/opm#> .
@@ -15,8 +15,27 @@
 
 ex:IntrinsicLightFixtureShape
   a sh:NodeShape ;
-  sh:targetClass <https://pi.pauwel.be/voc/distributionelement#FlowTerminal> ;
-  sh:severity sh:Violation ;
+
+  # Target light fixtures when their IFC class is present.
+  sh:targetClass ifc:IfcLightFixture ;
+
+  # In the patched LBD export, select only FlowTerminals classified
+  # as "Light Fixture" in their current property state.
+  sh:target [
+    a sh:SPARQLTarget ;
+    sh:select """
+      PREFIX props:  <http://lbd.arch.rwth-aachen.de/props#>
+      PREFIX opm:    <https://w3id.org/opm#>
+      PREFIX schema: <http://schema.org/>
+
+      SELECT DISTINCT ?this WHERE {
+        ?this a <https://pi.pauwel.be/voc/distributionelement#FlowTerminal> ;
+              props:iFCClassification/opm:hasPropertyState ?state .
+        ?state a opm:CurrentPropertyState ;
+               schema:value "Light Fixture" .
+      }
+    """ ;
+  ] ;
 
 #Pset_Photometric
   sh:property [
@@ -123,7 +142,7 @@ ex:IntrinsicLightFixtureShape
     sh:minLength 1 ;
     sh:in (
       "SurfaceMounted"
-      "Pendant"
+      "pendant"
       "FreeStanding"
       "Recessed"
       "PartlyRecessed"
